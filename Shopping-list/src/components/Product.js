@@ -12,6 +12,10 @@ class Product extends Component {
     this.props.handleIncrement(this)
   }
 
+  handleDelete(product){
+  this.props.handleDelete(this)
+}
+
   render() {
     return (
       <li>
@@ -27,6 +31,7 @@ class Product extends Component {
             </div>
             <p className ="product-category">{this.props.category}</p>
             <p>{this.props.price}</p>
+            <button type="button" className="product-delete" onClick={this.handleDelete.bind(this)}><img  src={require("../images/deleteItem.png")} alt="Delete Item"/></button>
         </div>
       </li>
     );

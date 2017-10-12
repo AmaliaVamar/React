@@ -17,6 +17,7 @@ class ListProducts extends Component {
             category={product.category}
             description={product.description}
             price={product.price}
+            handleDelete={this.props.deleteClick}
           />
         )}
       </ul>

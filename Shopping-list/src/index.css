@@ -8,6 +8,51 @@ body {
   font-family: sans-serif;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  width: 80%;
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  background-color: LightBlue;
+}
+
+.form div {
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+}
+
+.form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: DodgerBlue;
+}
+
+.form input, select {
+  padding: 5px;
+  border: none;
+  font-weight: bold;
+  color: Darkblue;
+  background-color: white;
+}
+
+.form-info-container div {
+  margin-bottom: 20px;
+}
+
+.input-submit {
+  height: 40px;
+  width: 80px;
+  margin-top: 40px;
+  border-radius: 20%;
+}
+
 .product {
   width: 100%;
   display: flex;
@@ -31,6 +76,19 @@ body {
   background-color: LightBlue;
   border-radius: 18px;
   padding: 8px;
+}
+
+.product-price {
+  width: 20px;
+}
+
+.product-delete {
+  width: 30px;
+  border: none;
+  background-color: white;
+}
+.product-delete img {
+  width: 100%;
 }
 
 .product-counter {
@@ -77,6 +135,7 @@ body {
 }
 
 .total-list span {
+  width: 50px;
   color: DodgerBlue;
   font-weight: bold;
   margin-left: 20px;

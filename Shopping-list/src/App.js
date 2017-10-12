@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ListProducts from './components/ListProducts';
 import TotalList from './components/TotalList.js';
+import AddItems from './components/AddItems.js';
 
 class App extends Component {
   constructor(props){
@@ -12,7 +13,7 @@ class App extends Component {
         amount: 0,
         productName:"Arroz",
         description:"Arroz integral",
-        category:"Legumbres",
+        category:"Cereales",
         price:3},
 
         {
@@ -42,6 +43,19 @@ class App extends Component {
     }
   }
 
+  handleAddItem(amount, productName, description, category, price){
+      let product = {};
+      let last = this.state.products.length-1;
+      let lastProduct = this.state.products.length === 0 ? 1 : this.state.products[last].id;
+      let id = lastProduct + 1;
+
+      product = { id, amount, productName, description, category, price };
+
+      this.setState({
+        products : this.state.products.concat(product),
+      })
+    }
+
   getTotal(){
     let totalProducts = 0 ;
     this.state.products.map( product =>
@@ -55,21 +69,9 @@ class App extends Component {
   decrementButton(product){
     let decrement = product.props.amount -1;
     let auxList = this.state.products;
-    // let encontrado = false;
-    // let i = 0;
-    // while (i < auxList.length && !encontrado) {
-    //     if(auxList[i].id === product.props.id){
-    //       encontrado = true;
-    //     }
-    //   i++;
-    // }
-    // auxList[i-1].amount = decrement;
     let selectedProduct = auxList.find(item => item.id === product.props.id);
     let position = auxList.indexOf(selectedProduct);
     auxList[position].amount = decrement;
-    // for (var i = 0; i < auxList.length; i++) {
-    //   if(auxList[i].id === product.props.id)
-    // }
     if(auxList[position].amount < 0){
       auxList[position].amount = 0;
     }
@@ -89,13 +91,28 @@ class App extends Component {
     })
   }
 
+  deleteButton(product){
+  let clickProduct = product.props.id
+  let listProducts = this.state.products
+  let auxList = listProducts.filter(function(item) {
+  return item.id !== clickProduct
+  })
+  this.setState({
+    products: auxList
+  })
+}
+
   render() {
     return (
-      <div>
+      <div className="container">
+        <AddItems
+          handleAddClick = {this.handleAddItem.bind(this)}
+        />
         <ListProducts
           data = {this.state.products}
           decrementClick = {this.decrementButton.bind(this)}
           incrementClick = {this.incrementButton.bind(this)}
+          deleteClick = {this.deleteButton.bind(this)}
         />
         <TotalList
           handleTotalClick ={this.getTotal.bind(this)}
